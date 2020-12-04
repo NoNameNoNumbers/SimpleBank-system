@@ -24,7 +24,7 @@ public class Branch {
             keyChain.get(account).getCustomerData(account);
         else
             System.out.println("Searched customer was not found");
-        //should get customer from the csv (if console starts new, the buffer is empty so what client will it get???)
+
     }
 
     public void printAllBranchCustomers() {
@@ -66,7 +66,7 @@ public class Branch {
         }catch (IOException e){
             e.printStackTrace();
         }
-        //upgrade: if customer account already there, don't add it again
+
     }
 
     public void readBranchData(){
@@ -100,7 +100,7 @@ public class Branch {
             String input = scan.nextLine();
             String []data = input.split(",");
             if(account==Integer.parseInt(data[0])){
-                //create to use then delete customer??
+
             }
 
         }catch (IOException e){
