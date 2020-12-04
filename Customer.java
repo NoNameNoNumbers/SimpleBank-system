@@ -7,9 +7,7 @@ import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-
 public class Customer {
-
 
     private class customerInfo {
         private String name;
@@ -88,9 +86,6 @@ public class Customer {
     }
 
     public void withdrawAmount(double amount){
-    //nush daca tre realizata operatiunea in functie de obiect sau sa adaug si contul ca sa verific daca e cine zice ca e
-    //obiectu ar actiona precum cardul dar contul sau pinul ar fi o masura de securitate
-    //cred ca voi adauga un PIN legat de cont si voi cere pinul la fiecare tranzactie (ca in realitate)
         if(cInfo.getBalance()+amount<0)
             System.out.println("We are sorry but your balance if insufficient for the chosen transaction");
         else {
@@ -114,23 +109,6 @@ public class Customer {
         }
         //mai vezi catch/throw error
     }
-
-//    public void saveToDoc(){
-//        try{
-//            fw=new FileWriter("customerData.txt");
-//            fw.write(this.customerAccount+","+cInfo.getName()+","+cInfo.getBalance()+" ");
-//            fw.close();
-//        }
-//        catch (IOException e){
-//            e.printStackTrace();
-//        }
-        //ca sa functioneze tre inchis in acelasi block try{}
-        //la fiecare scriere, rescrie tot documentul
-        //=>tre metoda de scriere si de citire
-        //concluzie de moment: pt update tre folosita functia de rescriere
-        //nu functioneaza varianta cu utilizarea metodei de scriere cu fiecare obiect
-        //  efectiv rescrie documentul => update data apoi saveToDoc
-//    }
 
     public void getCustomerData(int customerAccount){
 
@@ -165,21 +143,14 @@ public class Customer {
     public int getCustomerAccount() {
         return customerAccount;
     }
-
-
-
+    
     public void saveToDoc(FileWriter fw, int customerAccount) {
         try {
-
             Scanner scan = new Scanner(new BufferedReader(new FileReader("customerData.txt")));
             while(scan.hasNextLine()) {
                 String input = scan.nextLine();
                 String[] data = input.split(",");
-//                fw.write("Customer account: "+data[0]+","+"Name: "+data[1]+","+" Adress: "+
-//                        data[2]+","+"Customer phone contact: "+data[3]+
-//                        ","+"Balance: "+data[4]+"\n");
             }
-
                 fw.write("Customer account: "+this.customerAccount+","+"Name: "+cInfo.getName()+","+" Adress: "+
                         cInfo.getAddress()+","+"Customer phone contact: "+cInfo.getNumber()+
                         ","+"Balance: "+cInfo.getBalance()+"\n");
@@ -187,8 +158,4 @@ public class Customer {
             e.printStackTrace();
         }
     }
-
-
-
 }
-//  update(name,later number and other data),
