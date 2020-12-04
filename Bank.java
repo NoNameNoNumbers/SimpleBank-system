@@ -16,8 +16,6 @@ public class Bank {
 
     public void printAllBankBranches() {
         for (String i : bankBranches.keySet()) {
-            //print branch list and data about the branches
-            //branch number of clients and maybe total money deposited
             System.out.println(bankBranches.get(i).getBranchName());
         }
     }
@@ -40,11 +38,5 @@ public class Bank {
     public String getBankName() {
         return bankName;
     }
-
-    //metoda care sa caute in csv si nu in buffer
-
-    //delete branch ??
-
-    //list of bankbranches with folder of branch files???
 
 }
