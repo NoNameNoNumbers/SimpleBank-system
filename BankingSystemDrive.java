@@ -1,5 +1,3 @@
-
-
 public class BankingSystemDrive {
 
     public static void main(String[] args) {
@@ -9,26 +7,42 @@ public class BankingSystemDrive {
                 "where you can add new banks, branches and customers, manage customer transactions." +
                 "and update customer data. \n "
 */
+        Bank b = getBank("FirstBank");
+//        b.getAllBankBranches();
+//        b.deleteBranch("Branch 2");
+        b.addBankBranch(new Branch(getBank("FirstBank"),"Branch y"));
 
-        Customer c1 = new Customer("Andrew", "074619094", "address 1", 150);
-        Customer c2 = new Customer("John", "038545434", "address 2", 320);
-        Customer c3 = new Customer("Alex", "0845345232", "address 3", 1400);
-        Customer c4 = new Customer("Sebastian", "0845345232", "address 4", 3143);
-        Customer c5 = new Customer("Vlad", "0845345232", "address 5", 2122);
+//        Bank bank3 = new Bank("ThirdBank");
+//        bank1.getAllBankBranches();
+//
+//        Branch b2 = new Branch(bank1,"Branch 2");
+//        Branch b3 = new Branch(bank1,"Branch 3"   );
+//        Branch b4 = new Branch(bank1,"Branch 4");
+//
+//        Customer c1 = new Customer(b1,"Andrew", "074619094", "address 1", 150);
+//        Customer c2 = new Customer(b1,"John", "038545434", "address 2", 320);
+//        Customer c3 = new Customer(b1,"Alex", "0845345232", "address 3", 1400);
+        //scrierea functioneaza ok
+//
+//        Customer c4 = new Customer(b2,"Sebastian", "0845345232", "address 4", 3143);
+//        Customer c5 = new Customer(b2,"Vlad", "0845345232", "address 5", 2122);
 
 
-        Branch b1 = new Branch("Branch 1");
-        b1.addBranchCustomer(c3);
-        b1.addBranchCustomer(c4);
-
-        Bank bank1 = new Bank("FirstBank");
-        bank1.addBankBranch(b1);
-
-
+//        Bank bank2 = new Bank("SecondBank");
+//        Branch b5 = new Branch(bank2, "Branch 5");
+//        b1.saveToBranchDoc(); arrayIndexOutOfBounds at reading
+//        bank1.getBranch(b1.getBranchName());
+//        bank1.getBranch(b2.getBranchName());
+//        bank1.deleteBranch("Branch 2"); //make delete from bank csv also
+//        bank1.getAllBankBranches();
 
 
 
     }
+    public static Bank getBank(String bankName){
+        return new Bank(bankName);
+    }
+
 }
 
 /*

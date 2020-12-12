@@ -1,5 +1,3 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -7,7 +5,9 @@ import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+
 public class Customer {
+
 
     private class customerInfo {
         private String name;
@@ -15,18 +15,18 @@ public class Customer {
         private String address;
         private double balance;
 
-        public customerInfo(String name, String number, String address, double balance){
+        private customerInfo(String name, String number, String address, double balance){
             this.name=name;
             this.number=number;
             this.address=address;
             this.balance=balance;
         }
 
-        public void addTrans(double amount){
+        private void addTrans(double amount){
             this.balance+=amount;
         }
 
-        public void updateData(){
+        private void updateData(){
             Scanner scan = new Scanner(System.in);
             boolean quit =false;
             String option;
@@ -67,17 +67,21 @@ public class Customer {
 
         }
     }
+
+
     private int customerAccount=1;
     private HashMap<Integer, customerInfo>cont = new HashMap<>();
     private customerInfo cInfo;
     private ArrayList<Double>transactions;
+    private Branch branch;
 
-    public Customer(String name, String number, String address, double initialBalance){
+    public Customer(Branch br, String name, String number, String address, double initialBalance){
         cInfo=new customerInfo(name, number, address, initialBalance);
         this.customerAccount=accountGen();
         cont.put(this.customerAccount,cInfo);
         transactions=new ArrayList<>();
         transactions.add(initialBalance);
+        br.addBranchCustomer(this);
     }
 
     public void depositAmount(double amount){
@@ -86,6 +90,9 @@ public class Customer {
     }
 
     public void withdrawAmount(double amount){
+    //nush daca tre realizata operatiunea in functie de obiect sau sa adaug si contul ca sa verific daca e cine zice ca e
+    //obiectu ar actiona precum cardul dar contul sau pinul ar fi o masura de securitate
+    //cred ca voi adauga un PIN legat de cont si voi cere pinul la fiecare tranzactie (ca in realitate)
         if(cInfo.getBalance()+amount<0)
             System.out.println("We are sorry but your balance if insufficient for the chosen transaction");
         else {
@@ -109,6 +116,23 @@ public class Customer {
         }
         //mai vezi catch/throw error
     }
+
+//    public void saveToDoc(){
+//        try{
+//            fw=new FileWriter("customerData.txt");
+//            fw.write(this.customerAccount+","+cInfo.getName()+","+cInfo.getBalance()+" ");
+//            fw.close();
+//        }
+//        catch (IOException e){
+//            e.printStackTrace();
+//        }
+        //ca sa functioneze tre inchis in acelasi block try{}
+        //la fiecare scriere, rescrie tot documentul
+        //=>tre metoda de scriere si de citire
+        //concluzie de moment: pt update tre folosita functia de rescriere
+        //nu functioneaza varianta cu utilizarea metodei de scriere cu fiecare obiect
+        //  efectiv rescrie documentul => update data apoi saveToDoc
+//    }
 
     public void getCustomerData(int customerAccount){
 
@@ -143,19 +167,36 @@ public class Customer {
     public int getCustomerAccount() {
         return customerAccount;
     }
-    
-    public void saveToDoc(FileWriter fw, int customerAccount) {
+
+    public String getCustomerAddress(){
+        return cInfo.address;
+    }
+    public String getCustomerName(){
+        return cInfo.name;
+    }
+    public String getCustomerNumber(){
+        return cInfo.number;
+    }
+
+
+    public void saveToDoc(FileWriter fw, Customer c) {
         try {
-            Scanner scan = new Scanner(new BufferedReader(new FileReader("customerData.txt")));
-            while(scan.hasNextLine()) {
-                String input = scan.nextLine();
-                String[] data = input.split(",");
-            }
-                fw.write("Customer account: "+this.customerAccount+","+"Name: "+cInfo.getName()+","+" Adress: "+
-                        cInfo.getAddress()+","+"Customer phone contact: "+cInfo.getNumber()+
-                        ","+"Balance: "+cInfo.getBalance()+"\n");
+
+//                String input = scan.nextLine();
+//                String[] data = input.split(",");
+//                fw.write("Customer account: "+data[0]+","+"Name: "+data[1]+","+" Adress: "+
+//                        data[2]+","+"Customer phone contact: "+data[3]+
+//                        ","+"Balance: "+data[4]+"\n");
+
+
+                fw.write("Customer account: "+c.customerAccount+","+"Name: "+c.cInfo.getName()+","+"Adress: "+
+                        c.cInfo.getAddress()+","+"Customer phone contact: "+c.cInfo.getNumber()+
+                        ","+"Balance: "+c.cInfo.getBalance()+"\n");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+
+
 }
